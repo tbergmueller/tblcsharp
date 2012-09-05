@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="2.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectGuid>{0C93E081-1AC3-49E5-AAA7-7F40E5A10F9C}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>Library</OutputType>
+    <RootNamespace>TBL</RootNamespace>
+    <AssemblyName>TBL</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <SignAssembly>False</SignAssembly>
+    <DelaySign>False</DelaySign>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <SourceAnalysisOverrideSettingsFile>C:\Users\tbergmueller\AppData\Roaming\ICSharpCode/SharpDevelop3.0\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <BaseAddress>4194304</BaseAddress>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugSymbols>false</DebugSymbols>
+    <OutputPath>..\..\Debugs\V1_2\</OutputPath>
+    <DebugType>None</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+    <DebugSymbols>false</DebugSymbols>
+    <StartAction>Project</StartAction>
+    <OutputPath>..\..\Releases\V1_2\</OutputPath>
+    <DocumentationFile>..\..\Debugs\V1_2\TBL.xml</DocumentationFile>
+    <DebugType>None</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mysql.data">
+      <HintPath>mysql-connector-net-6.5.4-noinstall\v2\mysql.data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Blackboard.cs" />
+    <Compile Include="Crc8.cs" />
+    <Compile Include="crypt.cs" />
+    <Compile Include="Database.cs" />
+    <Compile Include="devCom.cs" />
+    <Compile Include="DevComSlave.cs" />
+    <Compile Include="DevComTcpServer.cs" />
+    <Compile Include="Hardware.cs" />
+    <Compile Include="errorHandling.cs" />
+    <Compile Include="exceptions.cs" />
+    <Compile Include="form_timeDialog.cs" />
+    <Compile Include="InputBoxDialog.cs" />
+    <Compile Include="LicenseForm.cs" />
+    <Compile Include="LicenseForm.Designer.cs">
+      <DependentUpon>LicenseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="m3s.cs" />
+    <Compile Include="myRoutines.cs" />
+    <Compile Include="Networking.cs" />
+    <Compile Include="OS.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="services.cs" />
+    <Compile Include="softwareActivation.cs" />
+    <Compile Include="stdCheck.cs" />
+    <Compile Include="stdOut.cs" />
+    <Compile Include="timeLicencing.cs" />
+    <Compile Include="VirtualTWIMaster.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="LicenseForm.resx">
+      <DependentUpon>LicenseForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <Private>False</Private>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+</Project>

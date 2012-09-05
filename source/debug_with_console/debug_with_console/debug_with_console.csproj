@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectGuid>{3DCA28F3-C517-45FF-9115-086C6140AA79}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>debug_with_console</RootNamespace>
+    <AssemblyName>debug_with_console</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mysql.data">
+      <HintPath>..\..\TBL\mysql-connector-net-6.5.4-noinstall\v2\mysql.data.dll</HintPath>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\TBL\Blackboard.cs">
+      <Link>Blackboard.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TBL\Crc8.cs">
+      <Link>Crc8.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TBL\crypt.cs">
+      <Link>crypt.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TBL\Database.cs">
+      <Link>Database.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TBL\devCom.cs">
+      <Link>devCom.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TBL\DevComSlave.cs">
+      <Link>DevComSlave.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TBL\DevComTcpServer.cs">
+      <Link>DevComTcpServer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TBL\errorHandling.cs">
+      <Link>errorHandling.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TBL\exceptions.cs">
+      <Link>exceptions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TBL\Hardware.cs">
+      <Link>Hardware.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TBL\InputBoxDialog.cs">
+      <Link>InputBoxDialog.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TBL\LicenseForm.cs">
+      <Link>LicenseForm.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TBL\LicenseForm.Designer.cs">
+      <Link>LicenseForm.Designer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TBL\m3s.cs">
+      <Link>m3s.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TBL\myRoutines.cs">
+      <Link>myRoutines.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TBL\Networking.cs">
+      <Link>Networking.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TBL\OS.cs">
+      <Link>OS.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TBL\services.cs">
+      <Link>services.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TBL\softwareActivation.cs">
+      <Link>softwareActivation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TBL\stdCheck.cs">
+      <Link>stdCheck.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TBL\stdOut.cs">
+      <Link>stdOut.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TBL\timeLicencing.cs">
+      <Link>timeLicencing.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TBL\VirtualTWIMaster.cs">
+      <Link>VirtualTWIMaster.cs</Link>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\TBL\LicenseForm.resx">
+      <Link>LicenseForm.resx</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+</Project>
