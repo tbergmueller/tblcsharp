@@ -2713,6 +2713,7 @@ namespace TBL.Communication
 		private const StopBits stopbits = StopBits.One;
 		private const Parity parity = Parity.None;
 		private const int databits = 8;		
+		private const int sPortReadtimeout = 2000;		// regulates CPU load, the higher the less CPU load
 		
 		private bool triggerShutdown = false;
 		
@@ -2876,16 +2877,27 @@ namespace TBL.Communication
 		
 		public void portListener()
 		{
+			byte[] read = new byte[1];
+			sPort.ReadTimeout=sPortReadtimeout;
+			
 			while(!triggerShutdown)
 			{
-				int toRead = sPort.BytesToRead;
-				
-				if(toRead > 0)
+				try
 				{
-					byte[] read = new byte[toRead];
-					sPort.Read(read,0, toRead);
+					int tmp = sPort.ReadByte();
 					
+					if(tmp < 0)
+					{
+						continue;
+					} 
+					
+					read[0] = (byte)(tmp);
 					processReceived(read);
+				}
+				catch
+				{
+					// Timeout catched
+					// Do nothing, this is normal behaviour
 				}
 			}
 		}
