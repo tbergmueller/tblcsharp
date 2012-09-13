@@ -464,7 +464,7 @@ namespace TBL.EDOLL
 			errors.Add(new errorBundle(-35, "Frame ist ungültig. Prüfsummenfehler", "CRC detektiert Fehler", "Störungen, diverses", "Starten Sie den Datentransfer erneut", false));
 			errors.Add(new errorBundle(-36, "Not Acknowledge wurde signalisiert.", "ACK Flag im Controlbyte nicht gesetzt", "Slave sendet explizites NAK", "Starten Sie den Datentransfer erneut", false));
 			errors.Add(new errorBundle(-37, "Implizites Not Acknowledge wurde signalisiert.", "ACK Flag im Controlbyte mit anderer Protokollnummer als ACK-Protokoll nicht gesetzt", "Slave sendet explizites NAK", "Starten Sie den Datentransfer erneut", false));
-			
+			errors.Add(new errorBundle(-38, "Could not connect to DMX4ALL-Device. No device found or already opened by another Application", "s.v.", "", "Check connection and close other applications", false));
 			#endregion
 			
 			// 200+
@@ -488,6 +488,7 @@ namespace TBL.EDOLL
 			errors.Add(new errorBundle(-217, "Request konnte erfolgreich abgesetzt werden, allerdings konnte keine gültige Antwort empfangen werden (Readtimeout)", "Befehl acknowledged, Readtimeout beim Warten auf Antwort", "Slaveseitig nicht implementiert, Kommando erfordert gar keine Antwort, ...", "Kontaktieren Sie den Hersteller", true));
 			errors.Add(new errorBundle(-218, "Antwort auf Ping inkorrekt.", "Gepingter Partner soll mit gleicher Payload antworten (Reflection), Payload war nicht gleich, es wurde aber ein Frame empfangen", "Implementierungsfehler im Gegenüber, Falscher Kommunikationspartner antwortete, ..", "Versuchen Sie erneut zu Pingen. Sollten Sie diesen Fehler öfters angezeigt bekommen, kontaktieren Sie den Hersteller.", false));
 			errors.Add(new errorBundle(-219, "VirtualTWIMaster: Response has invalid format or is sent from wrong TWI-Slave", "Response has to have Format (addr/inv.addr) and optional 2 Byte error code (in case of inv.addr)", "Faulty implementation or bus collision", "Check your System", false));
+			errors.Add(new errorBundle(-220, "DMX4AllWrapper: Not responsive, Timeout when waiting for termination char 'G' from hardware", "Readtimeout", "Hardware got stuck, Connection lost, ...", "Probably use the DMX4AllWrapper.TryReset-Methode() and see if that works (this will, if hardware is stuck or a byte got lost on transfer)",false));
 			#endregion
 			
 			// 500+
@@ -531,6 +532,8 @@ namespace TBL.EDOLL
 			errors.Add(new errorBundle(-572, "No IP Addresses Found in Network via ICMP-Pings", "ICMP Pings to all Host-Addresses in Network failed", "Either Ping deactivated (Windows Firewall...) or no Hosts in Network", "..", false));
 			errors.Add(new errorBundle(-573, "Could not establish Connection to Database with given parameters", "Either wrong parameters, wrong privileges for user or Database does not exist", "There are serveral..", "Check Configuration and System", true));
 			errors.Add(new errorBundle(-574, "SQL-Command execution failed", "Refer details via Debug-Mode", "Serveral...", "Turn on Debugmode and determine where the failure is..", false));
+			errors.Add(new errorBundle(-575, "Could not read config file", "various, this is a common error message", "already opened elsewhere, not existing, ...", "Check filename, probably it is opened in some other application", true));
+			errors.Add(new errorBundle(-576", Invalid Config File. Not fully parseable", "Configfile could not be parsed correctly, syntax errors", "Misspelled symbols, wrong spaces, wrong delimiters", "Syntax errors, missing params", "Check Syntax and parameters of config file", true));
 			#endregion
 			
 			// 600+

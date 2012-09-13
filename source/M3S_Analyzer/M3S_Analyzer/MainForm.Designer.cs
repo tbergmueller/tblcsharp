@@ -42,6 +42,7 @@ namespace M3S_Analyzer
 			this.mnu_start = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnu_stop = new System.Windows.Forms.ToolStripMenuItem();
 			this.createDummyContentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.mnu_openHexdump = new System.Windows.Forms.ToolStripMenuItem();
 			this.mnu_main.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -58,6 +59,8 @@ namespace M3S_Analyzer
 			// 
 			// fileToolStripMenuItem
 			// 
+			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+									this.mnu_openHexdump});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
 			this.fileToolStripMenuItem.Text = "File";
@@ -93,6 +96,13 @@ namespace M3S_Analyzer
 			this.createDummyContentToolStripMenuItem.Text = "CreateDummyContent";
 			this.createDummyContentToolStripMenuItem.Click += new System.EventHandler(this.CreateDummyContentToolStripMenuItemClick);
 			// 
+			// mnu_openHexdump
+			// 
+			this.mnu_openHexdump.Name = "mnu_openHexdump";
+			this.mnu_openHexdump.Size = new System.Drawing.Size(158, 22);
+			this.mnu_openHexdump.Text = "Open Hexdump";
+			this.mnu_openHexdump.Click += new System.EventHandler(this.Mnu_openHexdumpClick);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -107,6 +117,7 @@ namespace M3S_Analyzer
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.ToolStripMenuItem mnu_openHexdump;
 		private System.Windows.Forms.ToolStripMenuItem createDummyContentToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem mnu_stop;
 		private System.Windows.Forms.ToolStripMenuItem mnu_start;

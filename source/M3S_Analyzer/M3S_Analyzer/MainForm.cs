@@ -707,6 +707,87 @@ namespace M3S_Analyzer
 		void CreateDummyContentToolStripMenuItemClick(object sender, EventArgs e)
 		{
 			
+			
+			
+			
+			
+			
+		}
+		
+		
+		public int GetNumOfCharsInFile(string filePath)
+	   {
+	       int count = 0;
+	       
+	       using (System.IO.StreamReader sr = new System.IO.StreamReader(filePath))
+	       {
+	           while (sr.Read() != -1)
+	               count++;
+	       }
+	       
+	       return count;
+	   }
+
+		
+		
+		void Mnu_openHexdumpClick(object sender, EventArgs e)
+		{
+			OpenFileDialog opendia = new OpenFileDialog();
+			
+			opendia.InitialDirectory = TBL.OperatingSystem.DesktopDirectory;
+		    opendia.Filter = "hex files (*.hex)|*.hex|All files (*.*)|*.*" ;
+		    opendia.FilterIndex = 1;
+		    opendia.RestoreDirectory = true ;
+		    
+			if(opendia.ShowDialog() == DialogResult.OK)
+			{
+				int charCount = GetNumOfCharsInFile(opendia.FileName);
+				
+				int byteCount = charCount / 2;
+				
+				ThreadsafeReceiveBuffer recBuffer = new ThreadsafeReceiveBuffer(byteCount+1);
+				
+				
+				
+				int currentCharacter = 0;
+				string curFigure = "";
+				int ascii;
+				
+				// well.. now read
+				try
+				{
+					using (System.IO.StreamReader sr = new System.IO.StreamReader(opendia.FileName))
+			        {
+						while ((ascii = sr.Read()) != -1)
+			           {
+							curFigure += ((char)(ascii)).ToString();
+							
+							if((currentCharacter % 2) == 1)
+							{
+								int intval = Convert.ToInt32(curFigure, 16);  //Using ToUInt32 not ToUInt64, as per OP comment
+								recBuffer.AddByte((byte)(intval));
+								curFigure = "";
+							}
+			           	
+			           	  currentCharacter++;         	  
+			           	  
+			           }
+			        }
+				}
+				catch
+				{
+					stdOut.Error("Parsing error at Character " + currentCharacter.ToString());
+				}
+				
+				searchForFrames(recBuffer);
+				
+				this.Controls.Add(log.Visualisation);
+				log.VisualizationFitWindowSize(this);
+				stdOut.Info("should now open " + opendia.FileName);
+			}
+			
+			
+			
 		}
 	}
 }
