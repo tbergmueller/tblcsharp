@@ -20,6 +20,8 @@ using TBL.EDOLL;
 using TBL.Communication.Protocol;
 using System.Collections.Generic;
 
+using System.Diagnostics;
+
 namespace TBL.Communication 
 {
 	// TODO Genausete Checks mit Dokumentation + TCP-Clientcheck
@@ -195,6 +197,7 @@ namespace TBL.Communication
 	/// </list>
 	/// Details dazu sind am besten dem untenstehenden Codebeispiel zu entnehmen
 	/// </para>
+	/// <para>Please note when using DevComMaster with DevComSerialInterface: If you run your application in Linux (with Mono-Framework) the external tool "stty" has to be installed and accessible from commandline (added in path), because it is used to allow custom baudrates. If not installed, you might try something similar to "apt-get install stty"</para>
 	/// </remarks>
 	public class DevComMaster  
 	{	
@@ -710,6 +713,7 @@ namespace TBL.Communication
 		/// <para>Details zur Verbindungsherstellung siehe einzelne <see cref="IDevComHardwareInterface">Interfaces</see></para>
 		/// <para>Wurde die Verbindung erfolgreich hergestellt, wird ein <see cref="Reset(out int)">Reset</see> versendet. Ist auch dieses erfolgreich versendet worden, befindet sich die DevCom im arbeitsbereiten Zustand (siehe <see cref="Ready">Ready</see>).</para>
 		/// <para>Das Versenden des Resetframes versetzt den Bus in einen definierten Zustand und somit alle richtig konfigurierten Slaves (Baudrate übereinstimmend) in Empfangsbereitschaft. Nachdem eine Verbindung hergestellt wurde, empfielt es sich, sicherheitshalber einen, mehrere oder alle Slaves zu pingen, um Nicht-Erreichbarkeit von Slaves aufzudecken und/oder defekte Teilnehmer zu identifizieren</para>
+		/// <para>Please note when using DevComMaster with DevComSerialInterface: If you run your application in Linux (with Mono-Framework) the external tool "stty" has to be installed and accessible from commandline (added in path), because it is used to allow custom baudrates. If not installed, you might try something similar to "apt-get install stty"</para>
 		/// </remarks>
 		/// <seealso cref="ConnectWithoutReset(out int)">ConnectWithoutReset</seealso>
 		public bool Connect(out int oErrorCode)
@@ -732,6 +736,7 @@ namespace TBL.Communication
 		/// <para>Details zur Verbindungsherstellung siehe einzelne <see cref="IDevComHardwareInterface">Interfaces</see></para>
 		/// <para>Wurde die Verbindung erfolgreich hergestellt, wird ein <see cref="Reset(out int)">Reset</see> versendet. Ist auch dieses erfolgreich versendet worden, befindet sich die DevCom im arbeitsbereiten Zustand (siehe <see cref="Ready">Ready</see>).</para>
 		/// <para>Das Versenden des Resetframes versetzt den Bus in einen definierten Zustand und somit alle richtig konfigurierten Slaves (Baudrate übereinstimmend) in Empfangsbereitschaft. Nachdem eine Verbindung hergestellt wurde, empfielt es sich, sicherheitshalber einen, mehrere oder alle Slaves zu pingen, um Nicht-Erreichbarkeit von Slaves aufzudecken und/oder defekte Teilnehmer zu identifizieren</para>
+		/// <para>Please note when using DevComMaster with DevComSerialInterface: If you run your application in Linux (with Mono-Framework) the external tool "stty" has to be installed and accessible from commandline (added in path), because it is used to allow custom baudrates. If not installed, you might try something similar to "apt-get install stty"</para>
 		/// </remarks>
 		/// <seealso cref="ConnectWithoutReset(out int)">ConnectWithoutReset</seealso>
 		public bool Connect()
@@ -2797,6 +2802,9 @@ namespace TBL.Communication
 		/// 	<item><term>-33</term><description>ComPort existiert nicht</description></item>			
 		/// </list>
 		/// </returns>
+		/// <remarks>
+		/// When executing in Linux (via Mono-Framework) this method requires the external stty tool to be installed and accessible from commandline (added in Path).
+		/// </remarks>
 		public int Connect()
 		{			
 			if(recBuff == null)
@@ -2826,7 +2834,23 @@ namespace TBL.Communication
 					}
 					#endregion 
 					
+					sPort.BaudRate = baudrate;
 					sPort.Open();
+					
+					// some tricks are needed to make sure also custom baudrates are applied to the comport
+					if(OperatingSystem.IsUnix)
+					{			
+						ProcessStartInfo pStartInfo = new ProcessStartInfo("stty");
+						pStartInfo.Arguments = "-F "+portname+" speed " + baudrate.ToString();
+						
+						// Two times setting the parameter, only one time is not enough... linux behaves strange sometimes..
+						Process p = Process.Start(pStartInfo);						
+						p.WaitForExit(1000); // wat max. a second						
+						Process p2 = Process.Start(pStartInfo);						
+						p2.WaitForExit(1000); // wait max. a second
+					}			
+			
+			
 					if(sPort.IsOpen)
 					{						
 						connected = true;

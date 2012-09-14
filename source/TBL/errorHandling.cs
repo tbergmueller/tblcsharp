@@ -533,7 +533,7 @@ namespace TBL.EDOLL
 			errors.Add(new errorBundle(-573, "Could not establish Connection to Database with given parameters", "Either wrong parameters, wrong privileges for user or Database does not exist", "There are serveral..", "Check Configuration and System", true));
 			errors.Add(new errorBundle(-574, "SQL-Command execution failed", "Refer details via Debug-Mode", "Serveral...", "Turn on Debugmode and determine where the failure is..", false));
 			errors.Add(new errorBundle(-575, "Could not read config file", "various, this is a common error message", "already opened elsewhere, not existing, ...", "Check filename, probably it is opened in some other application", true));
-			errors.Add(new errorBundle(-576", Invalid Config File. Not fully parseable", "Configfile could not be parsed correctly, syntax errors", "Misspelled symbols, wrong spaces, wrong delimiters", "Syntax errors, missing params", "Check Syntax and parameters of config file", true));
+			errors.Add(new errorBundle(-576, "Invalid Config File. Not fully parseable", "Configfile could not be parsed correctly, syntax errors", "Syntax errors, missing params", "Check Syntax and parameters of config file", true));
 			#endregion
 			
 			// 600+
