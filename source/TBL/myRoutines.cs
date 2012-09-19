@@ -47,7 +47,7 @@ namespace TBL
 		/// <summary>
 		/// Aktuelle Bibliotheksversion der TBL
 		/// </summary>
-		public static string LibraryVersion = "1.1"; // TODO Hier ändern wenn neue Library rausgegeben wird
+		public static string LibraryVersion = "1.2"; // TODO Hier ändern wenn neue Library rausgegeben wird
 
 	}
 	

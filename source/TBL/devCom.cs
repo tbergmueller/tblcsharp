@@ -574,18 +574,36 @@ namespace TBL.Communication
 				// TODO Kein Bus darf 2x vorkommen...			
 				DevComMaster tmp;
 				
-				if(buff[1].Contains("COM"))
+				if(buff[1].Contains("COM") || buff[1].Contains("tty"))
 				{
-					devComSerialInterface myIfc = new devComSerialInterface(buff[1]);
+					devComSerialInterface myIfc = new devComSerialInterface(buff[1], int.Parse(buff[2]));
 					
 					 tmp = new DevComMaster(myIfc);
-					 tmp.Name = buff[2];
+					 
+					 
+					 if(buff.Length > 3)
+					{
+						tmp.Name = buff[3];
+					}
+					else
+					{
+						tmp.Name = "Untitled";
+					}
 				}
 				else
 				{
 					devComTcpClient myTmpClient = new devComTcpClient(buff[1], Convert.ToInt32(buff[2]));				
 					tmp = new DevComMaster(myTmpClient);
-					tmp.Name = buff[3];
+					
+					if(buff.Length > 3)
+					{
+						tmp.Name = buff[3];
+					}
+					else
+					{
+						tmp.Name = "Untitled";
+					}
+					
 				}				
 				
 				busses[i] = tmp;
