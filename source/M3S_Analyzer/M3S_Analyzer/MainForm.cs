@@ -737,7 +737,7 @@ namespace M3S_Analyzer
 			opendia.InitialDirectory = TBL.OperatingSystem.DesktopDirectory;
 		    opendia.Filter = "hex files (*.hex)|*.hex|All files (*.*)|*.*" ;
 		    opendia.FilterIndex = 1;
-		    opendia.RestoreDirectory = true ;
+		    opendia.RestoreDirectory = false ;
 		    
 			if(opendia.ShowDialog() == DialogResult.OK)
 			{
