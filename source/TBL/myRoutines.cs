@@ -44,6 +44,35 @@ namespace TBL
 				return(ExecutablePath.Substring(0,lastSlash+1));
 			}
 		}
+		
+		public static void ApplicationRestart(int vExitCode, string vArguments)
+		{
+			
+			System.Diagnostics.Process p = new System.Diagnostics.Process();
+			p.StartInfo.CreateNoWindow=true;
+				p.StartInfo.WorkingDirectory=TBL.Runtime.ExecutableDirectory;
+				p.StartInfo.UseShellExecute=false;
+			
+			if(TBL.OperatingSystem.IsUnix) // it runs on mono
+			{
+				p.StartInfo.FileName="mono";
+				p.StartInfo.Arguments = TBL.Runtime.ExecutablePath + " " + vArguments; 
+			}
+			else
+			{
+				p.StartInfo.FileName=TBL.Runtime.ExecutablePath;
+				p.StartInfo.Arguments = vArguments; 
+			}
+			
+			      
+			//p.StartInfo.RedirectStandardError=true;
+			//p.StartInfo.RedirectStandardOutput=true;
+			
+			p.Start();			
+			Environment.Exit(vExitCode);
+		}
+		
+		
 		/// <summary>
 		/// Aktuelle Bibliotheksversion der TBL
 		/// </summary>
