@@ -168,8 +168,22 @@ namespace TBL.Communication
 				}
 			}
 			
-			
-			
 		}
+		
+		/// <summary>
+		/// Returns or sets the m3s address
+		/// </summary>
+		public int m3sAddress
+		{
+			get
+			{
+				return(m3sAddr);
+			}
+			set
+			{
+				this.m3sAddr = value;
+			}
+		}
+		
 	}
 }

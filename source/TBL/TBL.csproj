@@ -64,7 +64,6 @@
     <Compile Include="devCom.cs" />
     <Compile Include="DevComSlave.cs" />
     <Compile Include="DevComTcpServer.cs" />
-    <Compile Include="DMX4AllWrapper.cs" />
     <Compile Include="Hardware.cs" />
     <Compile Include="errorHandling.cs" />
     <Compile Include="exceptions.cs" />
